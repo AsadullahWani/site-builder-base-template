@@ -31,7 +31,7 @@ export default function About() {
             Built for players, not spectators
           </h2>
           <p className="text-sand leading-relaxed mb-4">
-            COURT19 opened in 2019 as a single badminton hall and grew into a
+            BOXARENA opened in 2019 as a single badminton hall and grew into a
             four-sport arena by popular demand. There is no membership desk
             to get past and no minimum booking — just courts, kept in
             match condition, ready when you are.
