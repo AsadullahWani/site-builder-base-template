@@ -49,7 +49,7 @@ const total = selectedCourt.price * slots.length;
     exit={{ opacity: 0, y: 24, scale: 0.97 }}
     transition={{ duration: 0.25, ease: "easeOut" }}
     onClick={(e) => e.stopPropagation()}
-    className="relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85vh] sm:max-h-[90vh] overflow-y-auto hide-scrollbar"
+    className="relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85vh] max-h-[85dvh] sm:max-h-[90vh] sm:max-h-[90dvh] overflow-y-auto hide-scrollbar"
   >
         <button
           onClick={onClose}
