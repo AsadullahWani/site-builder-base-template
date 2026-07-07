@@ -44,7 +44,7 @@ const total = selectedCourt.price * slots.length;
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       // className="fixed inset-0 z-9999 flex items-center justify-center bg-black/70 px-4 py-6"
-      className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 px-4 pt-20 pb-6 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 px-4 pt-20 pb-6 backdrop-blur-md "
       onClick={onClose}
     >
       
@@ -54,7 +54,7 @@ const total = selectedCourt.price * slots.length;
         exit={{ opacity: 0, y: 24, scale: 0.97 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[90vh] overflow-y-auto"
+        className="relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[90vh] overflow-y-auto bottom-19 hide-scrollbar"
       >
         <button
           onClick={onClose}
