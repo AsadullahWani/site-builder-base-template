@@ -1,4 +1,4 @@
-# COURT19 — Sports Venue Template (Next.js)
+# BoxArena — Sports Venue Template (Next.js)
 
 A single-page template for an indoor sports arena, built with the Next.js
 App Router and Tailwind CSS. Includes Hero, About, FAQ, and Location

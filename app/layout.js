@@ -23,9 +23,9 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata = {
-  title: "COURT19 — Indoor Sports Arena",
+  title: "BOXARENA — Indoor Sports Arena",
   description:
-    "COURT19 is an indoor sports arena for badminton, futsal and box cricket in Vasant Kunj, New Delhi. Book a court by the hour, day or season.",
+    "BOXARENA is an indoor sports arena for badminton, futsal and table tennis in Kathmandu, Nepal. Book a court by the hour, day or season.",
 };
 
 export default function RootLayout({ children }) {
