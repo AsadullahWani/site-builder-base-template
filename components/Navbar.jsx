@@ -3,7 +3,6 @@ import ThemeToggle from '@/components/Toggle_button'
 import { useEffect, useState } from "react";
 import Image from 'next/image';
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
 
 const LINKS = [
   { href: "#about", label: "About" },
@@ -24,6 +23,7 @@ export default function Navbar({setIsOpen}) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  
   // useEffect(() => {
   //   document.body.style.overflow = isOpen ? "hidden" : "auto";
   //   return () => { document.body.style.overflow = "auto"; };
