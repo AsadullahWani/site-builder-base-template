@@ -1,6 +1,7 @@
 import CourtLines from "./CourtLines";
 import Gallery from "./Images";
 import Image from 'next/image'
+import {useState} from 'react';
 
 const SPORTS = [
   { name: "Badminton", detail: "2 courts, BWF-spec lines" },
@@ -10,6 +11,7 @@ const SPORTS = [
 ];
 
 export default function About() {
+  const [selectedImage, setSelectedImage] = useState(null);
   return (
     <section id="about" className="relative overflow-hidden bg-ink py-24 sm:py-32">
       {/* top-left silhouette accent */}

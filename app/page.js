@@ -1,3 +1,5 @@
+'use client';
+
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -6,11 +8,27 @@ import Location from "@/components/Location";
 import Footer from "@/components/Footer";
 import Reviews from "@/components/Reviews"
 import Gallery from "@/components/Images"
+import BookingModal from "@/components/Booking-popup"
+import { useState,useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 export default function Home() {
+    const [isOpen, setIsOpen] = useState(false);
+      useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    return () => { document.body.style.overflow = "auto"; };
+  }, [isOpen]);
+
   return (
     <>
-      <Navbar />
+    <div
+    className={`
+      transition-opacity duration-300
+      ${isOpen ? "backdrop-blur-sm pointer-events-none select-none" : ""}
+    `}>
+
+      <Navbar setIsOpen = {setIsOpen}/>
       <main>
         <Hero />
         <About />
@@ -23,6 +41,10 @@ export default function Home() {
         <Location />
       </main>
       <Footer />
+    </div>
+        <AnimatePresence>
+          {isOpen && <BookingModal onClose={() => setIsOpen(false)} />}
+        </AnimatePresence>
     </>
   );
 }

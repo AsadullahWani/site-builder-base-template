@@ -3,6 +3,7 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Swiper,SwiperSlide } from "swiper/react";
 import { Navigation,Pagination, Autoplay } from "swiper/modules";
+import {memo} from 'react';
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css";
@@ -42,7 +43,7 @@ const reviews = [
   },
 ];
 
-export default function Reviews() {
+function Reviews() {
   return (
           //  <section className="rounded-2xl border border-neutral-500 bg-neutral-900 p-8 shadow-xl">
             <section className="max-w-6xl mx-auto px-6">
@@ -103,3 +104,5 @@ export default function Reviews() {
 </section>
   );
 }
+
+export default memo(Reviews);

@@ -1,12 +1,13 @@
+'use client';
 import CourtLines from "./CourtLines";
-
+import {memo} from 'react';
 const HOURS = [
   { day: "Monday – Friday", time: "6:00 AM – 12:00 AM" },
   { day: "Saturday", time: "6:00 AM – 1:00 AM" },
   { day: "Sunday", time: "7:00 AM – 11:00 PM" },
 ];
 
-export default function Location() {
+function Location() {
   return (
     <section id="location" className="relative bg-ink py-24 sm:py-32 overflow-hidden">
       <div className="pointer-events-none absolute -left-32 bottom-0 hidden w-[480px] opacity-[0.15] lg:block">
@@ -104,5 +105,7 @@ export default function Location() {
     </section>
   );
 }
+
+export default memo(Location);
 
 
