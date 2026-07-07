@@ -39,23 +39,18 @@ const canPay = name && date && slots.length > 0;
 const total = selectedCourt.price * slots.length;
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      // className="fixed inset-0 z-9999 flex items-center justify-center bg-black/70 px-4 py-6"
-      className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 px-4 pt-20 pb-6 backdrop-blur-md "
-      onClick={onClose}
-    >
-      
-      <motion.div
-        initial={{ opacity: 0, y: 24, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 24, scale: 0.97 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-        onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[90vh] overflow-y-auto bottom-19 hide-scrollbar"
-      >
+   <motion.div
+  className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 px-4 pt-10 pb-6 sm:items-center sm:py-6"
+  onClick={onClose}
+>
+  <motion.div
+    initial={{ opacity: 0, y: 24, scale: 0.97 }}
+    animate={{ opacity: 1, y: 0, scale: 1 }}
+    exit={{ opacity: 0, y: 24, scale: 0.97 }}
+    transition={{ duration: 0.25, ease: "easeOut" }}
+    onClick={(e) => e.stopPropagation()}
+    className="relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85vh] sm:max-h-[90vh] overflow-y-auto hide-scrollbar"
+  >
         <button
           onClick={onClose}
           className="absolute right-6 top-6 text-sand hover:text-amber transition-colors"
