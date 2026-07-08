@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from 'next/image';
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+// import { locks } from 'node:worker_threads';
 
 
 const COURTS = [
@@ -43,6 +44,24 @@ export default function BookingModal({ onClose }) {
       window.scrollTo(0, parseInt(y || "0") * -1);
     };
   }, []);
+
+  const lockScroll = () => {
+  const scrollY = window.scrollY;
+  document.body.dataset.scrollY = scrollY;
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.width = "100%";
+  document.body.style.overflow = "hidden";
+};
+
+const unlockScroll = () => {
+  const scrollY = document.body.dataset.scrollY || "0";
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.width = "";
+  document.body.style.overflow = "";
+  window.scrollTo(0, parseInt(scrollY) * -1);
+};
 
 
 const toggleSlot = (s) => {
@@ -115,7 +134,11 @@ const total = selectedCourt.price * slots.length;
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Full name"
-              onFocus={(e)=>e.target.scrollIntoView({block:'center',behavior:'smooth'})}
+              onBlur={unlockScroll}
+              onFocus={
+                (e)=>{
+                  lockScroll();
+                  e.target.scrollIntoView({block:'center',behavior:'smooth'})}}
               className="w-full rounded-lg border border-turf/40 bg-transparent p-3 text-chalk placeholder:text-sand/50 focus:border-amber focus:outline-none"
             />
           </div>
@@ -127,8 +150,11 @@ const total = selectedCourt.price * slots.length;
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              onFocus={(e)=>e.target.scrollIntoView({block:'center',behavior:'smooth'})}
-
+              onBlur={unlockScroll}
+              onFocus={(e)=>{
+                lockScroll();
+                e.target.scrollIntoView({block:'center',behavior:'smooth'})}
+              }
               className="w-full rounded-lg border border-turf/40 bg-transparent p-3 text-chalk focus:border-amber focus:outline-none [color-scheme:dark]"
             />
           </div>
