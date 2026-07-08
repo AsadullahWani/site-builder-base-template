@@ -60,6 +60,16 @@ summary:focus-visible {
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
+
+/* hide scrollbar in page */
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
 /* Signature: court boundary lines that draw themselves in */
 .court-line {
   stroke-dasharray: 1400;

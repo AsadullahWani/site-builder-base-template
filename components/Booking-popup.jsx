@@ -27,7 +27,23 @@ export default function BookingModal({ onClose }) {
   const selectedCourt = COURTS.find((c) => c.id === court);
   // const canPay = name && date && slot;
 
-const [slots, setSlots] = useState([]); // was: const [slot, setSlot] = useState(null);
+  const [slots, setSlots] = useState([]); // was: const [slot, setSlot] = useState(null);
+  
+  useEffect(() => {
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
+    return () => {
+      const y = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, parseInt(y || "0") * -1);
+    };
+  }, []);
+
 
 const toggleSlot = (s) => {
   setSlots((prev) =>
@@ -49,7 +65,7 @@ const total = selectedCourt.price * slots.length;
     exit={{ opacity: 0, y: 24, scale: 0.97 }}
     transition={{ duration: 0.25, ease: "easeOut" }}
     onClick={(e) => e.stopPropagation()}
-    className="relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85vh] max-h-[85dvh] sm:max-h-[90vh] sm:max-h-[90dvh] overflow-y-auto hide-scrollbar"
+    className="relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85dvh] sm:max-h-[90dvh] overflow-y-auto hide-scrollbar"
   >
         <button
           onClick={onClose}
@@ -99,6 +115,7 @@ const total = selectedCourt.price * slots.length;
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Full name"
+              onFocus={(e)=>e.target.scrollIntoView({block:'center',behavior:'smooth'})}
               className="w-full rounded-lg border border-turf/40 bg-transparent p-3 text-chalk placeholder:text-sand/50 focus:border-amber focus:outline-none"
             />
           </div>
@@ -110,6 +127,8 @@ const total = selectedCourt.price * slots.length;
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
+              onFocus={(e)=>e.target.scrollIntoView({block:'center',behavior:'smooth'})}
+
               className="w-full rounded-lg border border-turf/40 bg-transparent p-3 text-chalk focus:border-amber focus:outline-none [color-scheme:dark]"
             />
           </div>
