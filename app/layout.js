@@ -27,6 +27,11 @@ export const metadata = {
   description:
     "BOXARENA is an indoor sports arena for badminton, futsal and table tennis in Kathmandu, Nepal. Book a court by the hour, day or season.",
 };
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  interactiveWidget: "resizes-content",
+};
 
 export default function RootLayout({ children }) {
   return (
