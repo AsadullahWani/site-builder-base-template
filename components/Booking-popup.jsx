@@ -30,20 +30,20 @@ export default function BookingModal({ onClose }) {
 
   const [slots, setSlots] = useState([]); // was: const [slot, setSlot] = useState(null);
   
-  useEffect(() => {
-    const scrollY = window.scrollY;
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = "100%";
+  // useEffect(() => {
+  //   const scrollY = window.scrollY;
+  //   document.body.style.position = "fixed";
+  //   document.body.style.top = `-${scrollY}px`;
+  //   document.body.style.width = "100%";
 
-    return () => {
-      const y = document.body.style.top;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      window.scrollTo(0, parseInt(y || "0") * -1);
-    };
-  }, []);
+  //   return () => {
+  //     const y = document.body.style.top;
+  //     document.body.style.position = "";
+  //     document.body.style.top = "";
+  //     document.body.style.width = "";
+  //     window.scrollTo(0, parseInt(y || "0") * -1);
+  //   };
+  // }, []);
 
   const lockScroll = () => {
   const scrollY = window.scrollY;
