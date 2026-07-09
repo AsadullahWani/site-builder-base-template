@@ -33,6 +33,26 @@ export default function BookingModal({ onClose }) {
   // handles iOS Safari's touch-scroll quirks for us, but it needs a real DOM
   // node (via ref) to lock around — passing it undefined (or the component
   // function itself) silently does nothing, which was the earlier bug.
+
+const [viewportHeight, setViewportHeight] = useState(null);
+
+useEffect(() => {
+  if (!window.visualViewport) return;
+
+  const updateHeight = () => {
+    setViewportHeight(window.visualViewport.height);
+  };
+
+  updateHeight();
+  window.visualViewport.addEventListener("resize", updateHeight);
+  window.visualViewport.addEventListener("scroll", updateHeight);
+
+  return () => {
+    window.visualViewport.removeEventListener("resize", updateHeight);
+    window.visualViewport.removeEventListener("scroll", updateHeight);
+  };
+}, []);
+
   useEffect(() => {
     const modalEl = modalRef.current;
     disableBodyScroll(modalEl);
@@ -45,12 +65,12 @@ export default function BookingModal({ onClose }) {
     );
   };
 
-  const scrollFieldIntoView = (e) => {
-    const target = e.target;
-    setTimeout(() => {
-      target.scrollIntoView({ block: "center", behavior: "smooth" });
-    });
-  };
+  // const scrollFieldIntoView = (e) => {
+  //   const target = e.target;
+  //   setTimeout(() => {
+  //     target.scrollIntoView({ block: "center", behavior: "smooth" });
+  //   });
+  // };
 
   return (
     <motion.div
@@ -64,6 +84,7 @@ export default function BookingModal({ onClose }) {
         exit={{ opacity: 0, y: 24, scale: 0.97 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
         onClick={(e) => e.stopPropagation()}
+        style={viewportHeight ? {maxHeight:`${viewportHeight * 0.9}px`}:undefined}
         className="relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85dvh] sm:max-h-[90dvh] hide-scrollbar overflow-y-auto"
       >
         <button
@@ -112,7 +133,7 @@ export default function BookingModal({ onClose }) {
             <input
               type="text"
               value={name}
-              onFocus={scrollFieldIntoView}
+              // onFocus={scrollFieldIntoView}
               onChange={(e) => setName(e.target.value)}
               placeholder="Full name"
               className="w-full rounded-lg border border-turf/40 bg-transparent p-3 text-base text-chalk placeholder:text-sand/50 focus:border-amber focus:outline-none"
@@ -125,7 +146,7 @@ export default function BookingModal({ onClose }) {
             <input
               type="date"
               value={date}
-              onFocus={scrollFieldIntoView}
+              // onFocus={scrollFieldIntoView}
               onChange={(e) => setDate(e.target.value)}
               className="w-full rounded-lg border border-turf/40 bg-transparent p-3 text-base text-chalk focus:border-amber focus:outline-none [color-scheme:dark]"
             />
