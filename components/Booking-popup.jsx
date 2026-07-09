@@ -45,7 +45,7 @@ export default function BookingModal({ open, onOpenChange }) {
             fixed z-50 hide-scrollbar overflow-y-auto
             inset-x-0 top-0 max-h-[90dvh] rounded-b-xl
             sm:inset-x-auto sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2
-            sm:max-h-[90dvh] sm:w-full sm:max-w-lg sm:rounded-xl
+            sm:max-h-[85dvh] sm:w-full sm:max-w-lg sm:rounded-xl
             border border-turf/40 bg-ink p-8
             data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-bottom-4
             data-[state=closed]:animate-out data-[state=closed]:fade-out
