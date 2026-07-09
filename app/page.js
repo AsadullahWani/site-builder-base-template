@@ -63,7 +63,8 @@ export default function Home() {
       <Footer />
     </div>
         <AnimatePresence>
-          {isOpen && <BookingModal onClose={() => setIsOpen(false)} />}
+          {/* {isOpen && <BookingModal onClose={() => setIsOpen(false)} />} */}
+          <BookingModal open={isOpen} onOpenChange={setIsOpen} />
         </AnimatePresence>
     </>
   );
