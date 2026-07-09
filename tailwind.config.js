@@ -24,6 +24,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwind-scrollbar-hide","tailwindcss-animate")
+  plugins: [require("tailwind-scrollbar-hide"),
+    require("tailwindcss-animate"),
   ],
 };
