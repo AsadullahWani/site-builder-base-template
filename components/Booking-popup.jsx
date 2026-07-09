@@ -35,12 +35,19 @@ export default function BookingModal({ onClose }) {
   // function itself) silently does nothing, which was the earlier bug.
 
 const [viewportHeight, setViewportHeight] = useState(null);
+const [keyboardOpen, setKeyboardOpen] = useState(false);
 
 useEffect(() => {
   if (!window.visualViewport) return;
 
   const updateHeight = () => {
-    setViewportHeight(window.visualViewport.height);
+    const vh = window.visualViewport.height;
+    const fullHeight = window.innerHeight;
+    // consider keyboard "open" if visual viewport shrank meaningfully
+    const isKeyboardOpen = fullHeight - vh > 100;
+
+    setKeyboardOpen(isKeyboardOpen);
+    setViewportHeight(vh);
   };
 
   updateHeight();
@@ -77,16 +84,16 @@ useEffect(() => {
       className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 px-4 pt-10 pb-6 sm:items-center sm:py-6"
       onClick={onClose}
     >
-      <motion.div
-        ref={modalRef}
-        initial={{ opacity: 0, y: 24, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 24, scale: 0.97 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-        onClick={(e) => e.stopPropagation()}
-        style={viewportHeight ? {maxHeight:`${viewportHeight * 0.9}px`}:undefined}
-        className="relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85dvh] sm:max-h-[90dvh] hide-scrollbar overflow-y-auto"
-      >
+    <motion.div
+      ref={modalRef}
+      initial={{ opacity: 0, y: 24, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 24, scale: 0.97 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      onClick={(e) => e.stopPropagation()}
+      style={keyboardOpen && viewportHeight ? { maxHeight: `${viewportHeight * 0.9}px` } : undefined}
+      className="relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85dvh] sm:max-h-[90dvh] hide-scrollbar overflow-y-auto"
+    >
         <button
           onClick={onClose}
           className="absolute right-6 top-6 text-sand hover:text-amber transition-colors"
