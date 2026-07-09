@@ -23,7 +23,7 @@ export default function BookingModal({ onClose }) {
   const [court, setCourt] = useState(COURTS[0].id);
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
-  const [inputFocused,setInputFocused] = useState(false);
+  // const [inputFocused,setInputFocused] = useState(false);
 
   const selectedCourt = COURTS.find((c) => c.id === court);
 
@@ -64,14 +64,35 @@ return() => {
  }
 ,[]);
 
-const scrollFieldIntoView = (e) =>{
-  setInputFocused(true);
-  const target = e.target;
-  setTimeout(()=>{
-    target.scrollIntoView({block:'center',behavior:'smooth'});
-},300)
-}
-const handleBlur = () =>setInputFocused(false);
+useEffect(() => {
+  if (!window.visualViewport) return;
+
+  const handleViewportChange = () => {
+    const vv = window.visualViewport;
+    // Keep the modal's fixed positioning in sync with the actual visible area
+    document.documentElement.style.setProperty(
+      "--vh-offset",
+      `${vv.offsetTop}px`
+    );
+  };
+
+  window.visualViewport.addEventListener("resize", handleViewportChange);
+  window.visualViewport.addEventListener("scroll", handleViewportChange);
+
+  return () => {
+    window.visualViewport.removeEventListener("resize", handleViewportChange);
+    window.visualViewport.removeEventListener("scroll", handleViewportChange);
+  };
+}, []);
+
+// const scrollFieldIntoView = (e) =>{
+//   setInputFocused(true);
+//   const target = e.target;
+//   setTimeout(()=>{
+//     target.scrollIntoView({block:'center',behavior:'smooth'});
+// },300)
+// }
+// const handleBlur = () =>setInputFocused(false);
 
 const toggleSlot = (s) => {
   setSlots((prev) =>
@@ -85,6 +106,8 @@ const total = selectedCourt.price * slots.length;
   return (
    <motion.div
   className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 px-4 pt-10 pb-6 sm:items-center sm:py-6"
+  style={{ transform: "translateY(var(--vh-offset, 0px))" }}
+
   onClick={onClose}
 >
   <motion.div
@@ -93,7 +116,7 @@ const total = selectedCourt.price * slots.length;
     exit={{ opacity: 0, y: 24, scale: 0.97 }}
     transition={{ duration: 0.25, ease: "easeOut" }}
     onClick={(e) => e.stopPropagation()}
-    className={`relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85dvh] sm:max-h-[90dvh] hide-scrollbar ${inputFocused ? "overflow-hidden":"overflow-y-auto"}`}
+    className={"relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85dvh] sm:max-h-[90dvh] overflow-y-auto hide-scrollbar "}
   >
         <button
           onClick={onClose}
@@ -143,8 +166,8 @@ const total = selectedCourt.price * slots.length;
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Full name"
-              onFocus={scrollFieldIntoView}
-              onBlur={handleBlur}
+              // onFocus={scrollFieldIntoView}
+              // onBlur={handleBlur}
               className="w-full rounded-lg border border-turf/40 bg-transparent p-3 text-chalk placeholder:text-sand/50 focus:border-amber focus:outline-none"
             />
           </div>
@@ -156,8 +179,8 @@ const total = selectedCourt.price * slots.length;
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              onFocus={scrollFieldIntoView}
-              onBlur={handleBlur}
+              // onFocus={scrollFieldIntoView}
+              // onBlur={handleBlur}
               className="w-full rounded-lg border border-turf/40 bg-transparent p-3 text-chalk focus:border-amber focus:outline-none [color-scheme:dark]"
             />
           </div>
