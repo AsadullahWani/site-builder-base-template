@@ -34,23 +34,23 @@ export default function BookingModal({ onClose }) {
   // node (via ref) to lock around — passing it undefined (or the component
   // function itself) silently does nothing, which was the earlier bug.
 
+const initialHeightRef = useRef(null);
+
 const [viewportHeight, setViewportHeight] = useState(null);
 const [keyboardOpen, setKeyboardOpen] = useState(false);
 
 useEffect(() => {
   if (!window.visualViewport) return;
 
+  initialHeightRef.current = window.visualViewport.height;
+
   const updateHeight = () => {
     const vh = window.visualViewport.height;
-    const fullHeight = window.innerHeight;
-    // consider keyboard "open" if visual viewport shrank meaningfully
-    const isKeyboardOpen = fullHeight - vh > 100;
-
+    const isKeyboardOpen = initialHeightRef.current - vh > 150;
     setKeyboardOpen(isKeyboardOpen);
     setViewportHeight(vh);
   };
 
-  updateHeight();
   window.visualViewport.addEventListener("resize", updateHeight);
   window.visualViewport.addEventListener("scroll", updateHeight);
 
