@@ -21,12 +21,11 @@ const SLOTS = [
 
 export default function BookingModal({ onClose }) {
   const [court, setCourt] = useState(COURTS[0].id);
-  const [slot, setSlot] = useState(null);
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
+  const [inputFocused,setInputFocused] = useState(false);
 
   const selectedCourt = COURTS.find((c) => c.id === court);
-  // const canPay = name && date && slot;
 
   const [slots, setSlots] = useState([]); // was: const [slot, setSlot] = useState(null);
   
@@ -45,24 +44,34 @@ export default function BookingModal({ onClose }) {
   //   };
   // }, []);
 
-  const lockScroll = () => {
+ useEffect(() => {
   const scrollY = window.scrollY;
   document.body.dataset.scrollY = scrollY;
   document.body.style.position = "fixed";
   document.body.style.top = `-${scrollY}px`;
   document.body.style.width = "100%";
   document.body.style.overflow = "hidden";
-};
+;
 
-const unlockScroll = () => {
+return() => {
   const scrollY = document.body.dataset.scrollY || "0";
   document.body.style.position = "";
   document.body.style.top = "";
   document.body.style.width = "";
   document.body.style.overflow = "";
   window.scrollTo(0, parseInt(scrollY) * -1);
-};
+}
+ }
+,[]);
 
+const scrollFieldIntoView = (e) =>{
+  setInputFocused(true);
+  const target = e.target;
+  setTimeout(()=>{
+    target.scrollIntoView({block:'center',behavior:'smooth'});
+},300)
+}
+const handleBlur = () =>setInputFocused(false);
 
 const toggleSlot = (s) => {
   setSlots((prev) =>
@@ -84,7 +93,7 @@ const total = selectedCourt.price * slots.length;
     exit={{ opacity: 0, y: 24, scale: 0.97 }}
     transition={{ duration: 0.25, ease: "easeOut" }}
     onClick={(e) => e.stopPropagation()}
-    className="relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85dvh] sm:max-h-[90dvh] overflow-y-auto hide-scrollbar"
+    className={`relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85dvh] sm:max-h-[90dvh] hide-scrollbar ${inputFocused ? "overflow-hidden":"overflow-y-auto"}`}
   >
         <button
           onClick={onClose}
@@ -134,11 +143,8 @@ const total = selectedCourt.price * slots.length;
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Full name"
-              onBlur={unlockScroll}
-              onFocus={
-                (e)=>{
-                  lockScroll();
-                  e.target.scrollIntoView({block:'center',behavior:'smooth'})}}
+              onFocus={scrollFieldIntoView}
+              onBlur={handleBlur}
               className="w-full rounded-lg border border-turf/40 bg-transparent p-3 text-chalk placeholder:text-sand/50 focus:border-amber focus:outline-none"
             />
           </div>
@@ -150,11 +156,8 @@ const total = selectedCourt.price * slots.length;
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              onBlur={unlockScroll}
-              onFocus={(e)=>{
-                lockScroll();
-                e.target.scrollIntoView({block:'center',behavior:'smooth'})}
-              }
+              onFocus={scrollFieldIntoView}
+              onBlur={handleBlur}
               className="w-full rounded-lg border border-turf/40 bg-transparent p-3 text-chalk focus:border-amber focus:outline-none [color-scheme:dark]"
             />
           </div>
