@@ -49,7 +49,7 @@ export default function BookingModal({ onClose }) {
     const target = e.target;
     setTimeout(() => {
       target.scrollIntoView({ block: "center", behavior: "smooth" });
-    }, 300);
+    });
   };
 
   return (
