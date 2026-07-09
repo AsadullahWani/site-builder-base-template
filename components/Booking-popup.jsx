@@ -23,7 +23,7 @@ export default function BookingModal({ onClose }) {
   const [court, setCourt] = useState(COURTS[0].id);
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
-  // const [inputFocused,setInputFocused] = useState(false);
+  const [inputFocused,setInputFocused] = useState(false);
 
   const selectedCourt = COURTS.find((c) => c.id === court);
 
@@ -85,14 +85,14 @@ useEffect(() => {
   };
 }, []);
 
-// const scrollFieldIntoView = (e) =>{
-//   setInputFocused(true);
+const scrollFieldIntoView = (e) =>{
+  setInputFocused(true);
 //   const target = e.target;
 //   setTimeout(()=>{
 //     target.scrollIntoView({block:'center',behavior:'smooth'});
 // },300)
-// }
-// const handleBlur = () =>setInputFocused(false);
+ }
+const handleBlur = () =>setInputFocused(false);
 
 const toggleSlot = (s) => {
   setSlots((prev) =>
@@ -116,7 +116,7 @@ const total = selectedCourt.price * slots.length;
     exit={{ opacity: 0, y: 24, scale: 0.97 }}
     transition={{ duration: 0.25, ease: "easeOut" }}
     onClick={(e) => e.stopPropagation()}
-    className={"relative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85dvh] sm:max-h-[90dvh] overflow-y-auto hide-scrollbar "}
+    className={`elative w-full max-w-lg rounded-xl border border-turf/40 bg-ink p-8 max-h-[85dvh] sm:max-h-[90dvh] hide-scrollbar ${inputFocused ? "overflow-hidden": "overflow-y-auto"}`}
   >
         <button
           onClick={onClose}
@@ -164,6 +164,8 @@ const total = selectedCourt.price * slots.length;
             <input
               type="text"
               value={name}
+              onFocus={scrollFieldIntoView}
+              onBlur = {handleBlur}
               onChange={(e) => setName(e.target.value)}
               placeholder="Full name"
               // onFocus={scrollFieldIntoView}
@@ -178,6 +180,8 @@ const total = selectedCourt.price * slots.length;
             <input
               type="date"
               value={date}
+              onFocus={scrollFieldIntoView}
+              onBlur = {handleBlur}
               onChange={(e) => setDate(e.target.value)}
               // onFocus={scrollFieldIntoView}
               // onBlur={handleBlur}
