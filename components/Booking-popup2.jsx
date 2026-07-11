@@ -177,21 +177,21 @@ const BookingModal = ({
         className={`rm-card ${className}`}
         style={{ "--rm-max-width": width }}
       >
-        <div className="rm-head">
+        {/* <div className="rm-head">
           {title ? (
             <h3 className="rm-title" id={titleId}>
               {title}
             </h3>
           ) : null}
 
+        </div> */}
           <button
-            className="absolute right-6 top-6 text-sand hover:text-amber transition-colors"
+            className="absolute right-6 top-3 text-sand hover:text-amber transition-colors"
             onClick={()=>setIsOpen(false)}
             aria-label="Close"
           >
             <X size={20} />
           </button>
-        </div>
 
         {/* Everything below is now inside the scrollable body,
             so it respects rm-body's max-height + overflow-y on mobile */}

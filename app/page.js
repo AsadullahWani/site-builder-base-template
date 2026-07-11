@@ -57,8 +57,8 @@ export default function Home() {
           <Gallery/>
         </div>
         <FAQ />
-        
-        <BookingModal open={isOpen} title={'Book Your Court'} setIsOpen = {setIsOpen}/>
+
+        <BookingModal open={isOpen}  setIsOpen = {setIsOpen}/>
         
         <Reviews />
         <Location />
