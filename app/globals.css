@@ -62,6 +62,8 @@ summary:focus-visible {
 }
 
 /* hide scrollbar in page */
+html { scrollbar-gutter: stable; }
+
 html {
   -ms-overflow-style: none;
   scrollbar-width: none;

@@ -38,12 +38,12 @@ export default function BookingModal({ open, onOpenChange }) {
         {/* Radix handles background scroll lock, focus trap, and
             aria attributes automatically — no manual body-scroll-lock
             or visualViewport code needed. */}
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/70 data-[state=open]:animate-in data-[state=open]:fade-in data-[state=closed]:animate-out data-[state=closed]:fade-out" />
+        <Dialog.Overlay className="fixed backdrop-blur inset-0 z-50 bg-black/70 data-[state=open]:animate-in data-[state=open]:fade-in data-[state=closed]:animate-out data-[state=closed]:fade-out" />
 
         <Dialog.Content
           className="
             fixed z-50 hide-scrollbar overflow-y-auto
-            inset-x-0 top-0 max-h-[90dvh] rounded-b-xl
+            inset-x-5 top-5 max-h-[90dvh] rounded-xl
             sm:inset-x-auto sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2
             sm:max-h-[90dvh] sm:w-full sm:max-w-lg sm:rounded-xl
             border border-turf/40 bg-ink p-8

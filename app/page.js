@@ -8,9 +8,10 @@ import Location from "@/components/Location";
 import Footer from "@/components/Footer";
 import Reviews from "@/components/Reviews"
 import Gallery from "@/components/Images"
-import BookingModal from "@/components/Booking-popup"
+// import BookingModal from "@/components/Booking-popup"
 import { useState,useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import BookingModal from "@/components/Booking-popup2"
 
 
 export default function Home() {
@@ -57,15 +58,16 @@ export default function Home() {
         </div>
         <FAQ />
         
+        <BookingModal open={isOpen} title={'Book Your Court'} setIsOpen = {setIsOpen}/>
+        
         <Reviews />
         <Location />
       </main>
       <Footer />
     </div>
-        <AnimatePresence>
-          {/* {isOpen && <BookingModal onClose={() => setIsOpen(false)} />} */}
-          <BookingModal open={isOpen} onOpenChange={setIsOpen} />
-        </AnimatePresence>
+        {/* <AnimatePresence> */}
+          {/* <BookingModal open={isOpen} onOpenChange={setIsOpen} />
+        </AnimatePresence> */}
     </>
   );
 }
