@@ -60,7 +60,7 @@ export default function Home() {
 
         <BookingModal open={isOpen}  setIsOpen = {setIsOpen}/>
         
-        <Reviews />
+        {/* <Reviews /> */}
         <Location />
       </main>
       <Footer />
